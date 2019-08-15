@@ -1,8 +1,9 @@
-new Vue({ 
+window.onload = function (){
+  var app = new Vue({
     el: '#app',
     data: {
-        message: 'baby'
+      message: 'Hello Vue!'
     }
-});
-Vue.message = "how are you "
-
+  });
+  app.message = "Assign here different message"
+}
