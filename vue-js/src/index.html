@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My first Vue app</title>
+  <title>Vue app</title>
   <script src="vue.js"></script>
-  <script type = "text/javascript" src="index.js"></script>
 </head>
 <body>
   <div id="app">
     {{ message }}
+    <br><br>
+    <span :title="message" v-bind:style="look"> Mouse over here and you find date string</span>
+    <br><br>
+    <span v-if="bool"> if(true) find me here.</span>
+    <span v-else> else(false) find me here.</span>
   </div>
-
 </body>
+  <script src="index.js"></script>
 </html>
