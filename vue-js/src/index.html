@@ -1,18 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Vue app</title>
-  <script src="vue.js"></script>
-</head>
-<body>
-  <div id="app">
-    {{ message }}
-    <br><br>
-    <span :title="message" v-bind:style="look"> Mouse over here and you find date string</span>
-    <br><br>
-    <span v-if="bool"> if(true) find me here.</span>
-    <span v-else> else(false) find me here.</span>
-  </div>
-</body>
+  <head>
+    <title>Vue app</title>
+    <script src="vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      {{ message }}
+      <p style="color:red">* Example of "v-bind"  </p>
+      <br><br>
+      <span :title="mouseMsg" v-bind:style="look"> Mouse over here and you find date string</span>
+      <br><br>
+      <p style="color:red">* Example of "v-if"  </p>
+      <span v-if="bool"> if(true) find me here.</span>
+      <span v-else> else(false) find me here.</span>
+      <br><br>
+      <p style="color:red">* Example of "v-for"  </p>
+      <form v-for="arr in array" > 
+        <ul>
+          <li>{{arr}}</li>
+        </ul>
+      </form>
+      <p style="color:red">* Example of "v-for key-value pair"</p>
+      <form v-for="i in todo">
+        <ul>
+          <li>{{i.text}}</li>
+        </ul>
+      </form>
+      <p style="color:red">* Example of v-model </p>
+      <p>{{message}}</p>
+      <input v-model="message">
+      <p style="color:red">* Example of vue methods </p>
+      <button v-on:click="reverse">Click to reverse  </button>
+      <ol>
+        <vdo v-for="item in groceryList" 
+              :tod="item"
+              :key="item.id"
+              >
+        </vdo>
+      </ol>
+    </div>
+  </body>
   <script src="index.js"></script>
 </html>
