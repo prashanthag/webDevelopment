@@ -1,0 +1,36 @@
+	sqlalchemy cheat sheet 
+*  https://github.com/crazyguitar/pysheeet/blob/master/docs/notes/python-sqlalchemy.rst#set-a-database-url
+
+	person = Person(name='Amy')
+	db.session.add(person)
+	db.session.commit()
+	
+	https://github.com/crazyguitar/pysheeet/blob/master/docs/notes/python-sqlalchemy.rst#set-a-database-url
+	
+	
+* 	Queries 
+	MyModel.order_by(MyModel.created_at)
+	MyModel.order_by(db.desc(MyModel.created_at))
+	  To order the results by a given attribute. Use db.desc to order in descending order.
+	  
+	Join
+	Driver.query.join('vehicles')
+	Query has a method join(<table_name>) for joining one model to another table.
+
+	print(Person.query.filter(Person.name.like('%my%')).all());
+	
+* SQLAlchemy Object Lifecycle	
+	Within a session, we create transactions every time we want to commit work to the database.
+	Proposed changes are not immediately committed to the database and instead go through stages to allow for undos.
+	The ability to undo is allowed via db.session.rollback()
+	Stages:
+	Transient: an object exists, it was defined.
+
+	user1 = User(name='Amy')
+	...but not attached to a session (yet).
+
+	Pending: an object was attached to a session. "Undo" becomes available via db.session.rollback(). Waits for a flush to happen
+
+	Flushed: about ready to be committed to the database, translating actions into SQL command statements for the engine.
+
+	Committed: manually called for a change to persist to the database (permanently); session's transaction is cleared for a new set of changes.
