@@ -7,9 +7,12 @@ from urllib.request import urlopen
 
 app = Flask(__name__)
 
-AUTH0_DOMAIN = @TODO_REPLACE_WITH_YOUR_DOMAIN
+AUTH0_DOMAIN = 'prasauth.auth0.com'
+#AUTH0_DOMAIN = 'fsnd.auth0.com'
 ALGORITHMS = ['RS256']
-API_AUDIENCE = @TODO_REPLACE_WITH_YOUR_API_AUDIENCE
+API_AUDIENCE = 'image'
+#API_AUDIENCE = 'https://prasauth.auth0.com/api/v2/'
+
 
 
 class AuthError(Exception):
@@ -48,6 +51,7 @@ def get_token_auth_header():
         }, 401)
 
     token = parts[1]
+   
     return token
 
 
@@ -56,12 +60,13 @@ def verify_decode_jwt(token):
     jwks = json.loads(jsonurl.read())
     unverified_header = jwt.get_unverified_header(token)
     rsa_key = {}
+    print("unverified_header: ",unverified_header)
     if 'kid' not in unverified_header:
         raise AuthError({
             'code': 'invalid_header',
             'description': 'Authorization malformed.'
         }, 401)
-
+    print("debug1")
     for key in jwks['keys']:
         if key['kid'] == unverified_header['kid']:
             rsa_key = {
@@ -71,7 +76,9 @@ def verify_decode_jwt(token):
                 'n': key['n'],
                 'e': key['e']
             }
+    print("debug2")
     if rsa_key:
+        print("debug3")
         try:
             payload = jwt.decode(
                 token,
@@ -80,7 +87,7 @@ def verify_decode_jwt(token):
                 audience=API_AUDIENCE,
                 issuer='https://' + AUTH0_DOMAIN + '/'
             )
-
+            print("debug4")
             return payload
 
         except jwt.ExpiredSignatureError:
@@ -104,21 +111,47 @@ def verify_decode_jwt(token):
                 'description': 'Unable to find the appropriate key.'
             }, 400)
 
+def check_permissions(permission, payload):
+    print("check permission")
+    if 'permissions' not in payload:
+                        raise AuthError({
+                            'code': 'invalid_claims',
+                            'description': 'Permissions not included in JWT.'
+                        }, 400)
 
-def requires_auth(f):
-    @wraps(f)
-    def wrapper(*args, **kwargs):
-        token = get_token_auth_header()
-        try:
-            payload = verify_decode_jwt(token)
-        except:
-            abort(401)
-        return f(payload, *args, **kwargs)
+    if permission not in payload['permissions']:
+        raise AuthError({
+            'code': 'unauthorized',
+            'description': 'Permission not found.'
+        }, 403)
+    return True
 
-    return wrapper
+def requires_auth(permission=''):
+    def requires_auth_decor(f):
+        @wraps(f)
+        def wrapper(*args, **kwargs):
+            token = get_token_auth_header()
+            print("token: ", token)
+            try:
+                payload = verify_decode_jwt(token)               
+            except:
+                abort(401)
+            check_permissions(permission,payload)
+            return f(payload, *args, **kwargs)
+        return wrapper
+    return requires_auth_decor
 
+'''
 @app.route('/headers')
 @requires_auth
 def headers(payload):
     print(payload)
     return 'Access Granted'
+'''
+
+@app.route('/images')
+@requires_auth('get:images')
+def headers(payload):
+    print(payload)
+    return 'Access Granted'
+
