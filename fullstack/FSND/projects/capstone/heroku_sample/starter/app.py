@@ -1,5 +1,8 @@
+
 import os
-from flask import Flask
+import sys
+from flask import Flask,abort
+from flask_cors import CORS
 from models import setup_db
 
 def create_app(test_config=None):
@@ -10,10 +13,14 @@ def create_app(test_config=None):
 
     @app.route('/')
     def get_greeting():
-        excited = os.environ['EXCITED']
-        greeting = "Hello" 
-        if excited == 'true': greeting = greeting + "!!!!!"
-        return greeting
+        try:
+            excited = os.environ['EXCITED']
+            greeting = "Hello" 
+            if excited == 'true': greeting = greeting + "!!!!!"
+            return greeting
+        except:
+             print(sys.exc_info())
+             abort(422)
 
     @app.route('/coolkids')
     def be_cool():
@@ -24,4 +31,4 @@ def create_app(test_config=None):
 app = create_app()
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
