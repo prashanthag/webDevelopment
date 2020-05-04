@@ -113,7 +113,7 @@ def venues():
     areas = db.session.query(Venue.city, Venue.state).distinct()
     data = []
     print("areas: \n",areas)
-    venue = {}
+    #venue = {}
     for area in areas:
         venue = dict(zip(('city', 'state'), area))
         venue['venues'] = []
@@ -131,7 +131,7 @@ def venues():
             }
         venue['venues'].append(venues_data)
         data.append(venue)
-    print("\n data: ",data)
+    #print("\n data: ",data)
     return render_template('pages/venues.html', areas=data)
 
 
@@ -217,7 +217,6 @@ def create_venue_submission():
             seeking_description = request.form['seeking_description']
         if 'seeking_description' not in request.form == '':
             seeking_description = 'We are looking for talents!'
-        print("debug0")
         new_venue = Venue(
             name=request.form['name'],
             city=request.form['city'],
@@ -230,12 +229,9 @@ def create_venue_submission():
             #image_link=request.form['image_link'],
             seeking_talent=seeking_talent,
             seeking_description=seeking_description
-        )
-        print("debug1")
-        db.session.add(new_venue)
-        
-        db.session.commit()
-        print("debug3")
+        )        
+        db.session.add(new_venue)        
+        db.session.commit()        
         flash('Venue ' + request.form['name'] + ' was successfully listed!')
     except:
         print(sys.exc_info())
