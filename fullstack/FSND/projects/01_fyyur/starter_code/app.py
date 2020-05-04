@@ -130,7 +130,7 @@ def venues():
                 'num_upcoming_shows': len(shows)
             }
         venue['venues'].append(venues_data)
-    data.append(venue)
+        data.append(venue)
     print("\n data: ",data)
     return render_template('pages/venues.html', areas=data)
 
