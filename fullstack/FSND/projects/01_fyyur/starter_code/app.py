@@ -114,8 +114,8 @@ def venues():
     data = []
     print("areas: \n",areas)
     venue = {}
-    for venue in areas:
-        venue = dict(zip(('city', 'state'), venue))
+    for area in areas:
+        venue = dict(zip(('city', 'state'), area))
         venue['venues'] = []
         for venue_data in Venue.query.filter_by(
             city=venue['city'],
@@ -131,7 +131,7 @@ def venues():
             }
         venue['venues'].append(venues_data)
     data.append(venue)
-
+    print("\n data: ",data)
     return render_template('pages/venues.html', areas=data)
 
 
@@ -208,7 +208,7 @@ def create_venue_form():
 @app.route('/venues/create', methods=['POST'])
 def create_venue_submission():
     try:
-        print("debug -1")
+        
         seeking_talent = False
         seeking_description = ''
         if 'seeking_talent' in request.form:
@@ -227,17 +227,18 @@ def create_venue_submission():
             genres=request.form['genres'],
             facebook_link=request.form['facebook_link'],
             website=request.form['website'],
-            image_link=request.form['image_link'],
+            #image_link=request.form['image_link'],
             seeking_talent=seeking_talent,
             seeking_description=seeking_description
         )
         print("debug1")
         db.session.add(new_venue)
-        print("debug2")
+        
         db.session.commit()
         print("debug3")
         flash('Venue ' + request.form['name'] + ' was successfully listed!')
     except:
+        print(sys.exc_info())
         error = True
         db.session.rollback()
         flash(
@@ -267,7 +268,7 @@ def delete_venue(venue_id):
 @app.route('/artists/<artist_id>', methods=['DELETE'])
 def delete_artist(artist_id):
     try:
-        artist = Artist.query.filter_by(id=Artit_id).first_or_404()
+        artist = Artist.query.filter_by(id=artist_id).first_or_404()
         db.session.delete(artist)
         db.session.commit()
     except:
@@ -473,7 +474,7 @@ def create_artist_submission():
             state=request.form['state'],
             phone=request.form['phone'],
             website=request.form['website'],
-            image_link=request.form['image_link'],
+            #image_link=request.form['image_link'],
             genres=request.form['genres'],
             facebook_link=request.form['facebook_link'],
             seeking_venue=seeking_venue,
@@ -556,6 +557,7 @@ def create_show_submission():
         flash('Show was successfully listed!')
 
     except:
+        print(sys.exc_info())
         error = True
         db.session.rollback()
         flash('An error occurred. Show could not be listed.')
@@ -596,7 +598,7 @@ if not app.debug:
 
 # Default port:
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
 
 # Or specify port manually:
 '''
