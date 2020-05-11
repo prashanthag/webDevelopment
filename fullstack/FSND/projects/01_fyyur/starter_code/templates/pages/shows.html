@@ -1,8 +1,13 @@
 {% extends 'layouts/main.html' %}
 {% block title %}Fyyur | Shows{% endblock %}
 {% block content %}
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <div class="row shows">
-    {%for show in shows %}
+
+    {%for show in shows if show.venue_image_link is not none %}
+ <!--
     <div class="col-sm-4">
         <div class="tile tile-show">
             <img src="{{ show.artist_image_link }}" alt="Artist Image" />
@@ -14,6 +19,27 @@
             <h5><a href="/venues/{{ show.venue_id }}">{{ show.venue_name }}</a></h5>
         </div>
     </div>
+
+    --> 
+                <div class="w3-row-padding w3-margin-top">
+             
+                    <div class="w3-third">
+                        <div class="w3-card">
+                            <img src="{{ show.venue_image_link }}" style="width:100%">
+                            <div class="w3-container">
+                 <img src="{{ show.artist_image_link }}" alt="Artist Image" />
+                    <h4>{{ show.start_time|datetime('full') }}</h4>
+                    <h5><a href="/artists/{{ show.artist_id }}">{{ show.artist_name }}</a></h5>
+                    <p>playing at</p>
+                    <img src="{{ show.venue_image_link }}" alt="Venue Image" />
+                    <h4>{{ show.start_time|datetime('full') }}</h4>
+                    <h5><a href="/venues/{{ show.venue_id }}">{{ show.venue_name }}</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+      
+
     {% endfor %}
 </div>
 {% endblock %}
