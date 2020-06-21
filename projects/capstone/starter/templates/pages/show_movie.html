@@ -1,0 +1,19 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Actor Search{% endblock %}
+{% block content %}
+<div class="row">
+	<div class="col-sm-6">
+		<h1 class="monospace">
+			{{ movie.title }}
+		</h1>
+		<p class="subtitle">
+			ID: {{ movie.id }}
+		</p>
+		<p>
+			<i class="fas fa-film"></i>{% if movie.title %}	{{movie.title}}{% else %}No Movies{% endif %}<br>
+			<i class="fa fa-calendar" aria-hidden="true"></i> {% if movie.release_date %}ReleaseDate: {{movie.release_date}}{% else %}No Movies{% endif %}
+		</p>
+	</div>
+</div>
+{% endblock %}
+

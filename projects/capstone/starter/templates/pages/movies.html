@@ -1,0 +1,68 @@
+{% extends 'layouts/main.html' %}
+
+{% block title %}Casting Agency Movies{% endblock %}
+{% block content %}
+{% for area in areas %}
+	<ul class="items">
+		{% for movie in area.movies %}
+		<li>
+			<div class="row"  >
+				<a  href="/movies/{{ movie.id }}">
+					<i class="fas fa-film"></i>
+					{{movie.title}} 
+				</a>				
+				 
+				 
+				<a class="delete"  title="Delete" data-toggle="tooltip" onclick=fetchu('/movies/{{ movie.id }}')><i class="far fa-trash-alt"></i></a>
+				<a class="edit" title="Edit" data-toggle="tooltip" href='/movies/{{ movie.id }}/edit'><i class="fas fa-edit"></i> </a>
+
+			</div>
+			<br>
+		</li>
+		{% endfor %}
+		
+	</ul>
+{% endfor %}
+
+<style>
+ .edit{
+	 
+	 width :60px;
+	 color :green;
+	 float :right;
+ }
+  .delete{
+	 
+	 width : 1000px;
+	 color : blue;
+	 float : right;
+ }
+</style>
+<script type="text/javascript">
+	function fetchu(url) {
+		console.log("delete function")
+		fetch(url,{
+			method:'DELETE',
+			 mode: 'cors',
+			
+		})
+		  .then(response => {
+
+			 window.location.reload(true);
+		  })
+		  .catch((error) => {
+				console.error('Error2:', error);
+		  });
+		 
+	}
+	function editt(url) {
+		console.log("edit function: ",url)
+		fetch(url,{
+			method:'GET',
+			 mode: 'cors', // no-cors, *cors, same-origin,
+			
+		});
+	}
+
+</script>
+{% endblock %}
