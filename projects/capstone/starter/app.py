@@ -9,6 +9,7 @@ import json
 import logging
 from logging import Formatter, FileHandler
 from flask_wtf import Form
+#import FlaskForm as Form
 from forms import *
 from flask_migrate import Migrate
 import sys
@@ -281,14 +282,10 @@ def edit_actor(actor_id):
 def edit_actor_submission(actor_id):
     try:
         actor = Actors.query.get(actor_id)
-        form = ActorForm()
-
-        seeking_venue = False
-        if 'seeking_venue' in request.form:
-            seeking_venue = request.form['seeking_venue'] == 'y'
-            actor.name = request.form['name']
-            actor.city = request.form['city']
-
+        form = ActorForm(obj=actor)
+        actor.name = request.form['name']
+        actor.age = request.form['age']
+        actor.gender = request.form['gender']
         db.session.commit()
 
         flash('Actor ' + request.form['name'] + ' was successfully edited!')

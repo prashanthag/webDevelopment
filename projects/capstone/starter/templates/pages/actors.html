@@ -4,13 +4,39 @@
 <ul class="items">
 	{% for actor in actors %}
 	<li>
-		<a href="/actors/{{ actor.id }}">
-			<i class="fas fa-users"></i>
-			<div class="item">
-				<h5>{{ actor.name }}</h5>
-			</div>
-		</a>
+	  <div class="row">
+		<div class="col-md-4">
+			<a  style="color:blue" href="/actors/{{ actor.id }}">
+				<i class="fas fa-users"></i>		
+					{{ actor.name }}			
+			</a>
+		</div>
+		<div class="col-md-1">
+			<a  style="color:green" class="edit" title="Edit" data-toggle="tooltip" href='/actors/{{ actor.id }}/edit'><i class="fas fa-edit"></i> </a>
+		 </div>
+		<div class="col-md-1">
+			<a class="delete"  title="Delete" data-toggle="tooltip" onclick=fetchu('/actors/{{ actor.id }}')><i class="far fa-trash-alt"></i></a>
+		 </div>
+
+	  </div>
 	</li>
 	{% endfor %}
 </ul>
+<script type="text/javascript">
+	function fetchu(url) {
+		console.log("delete function")
+		fetch(url,{
+			method:'DELETE',
+			 mode: 'cors',
+			 redirect:'follow',			
+		})
+		.then(response => {
+			window.location.reload(true);
+		})
+		.catch((error) => {
+			console.error('Error:', error);
+		});
+		
+	}
+</script>
 {% endblock %}

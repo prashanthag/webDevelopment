@@ -6,16 +6,19 @@
 	<ul class="items">
 		{% for movie in area.movies %}
 		<li>
-			<div class="row"  >
-				<a  href="/movies/{{ movie.id }}">
-					<i class="fas fa-film"></i>
-					{{movie.title}} 
-				</a>				
-				 
-				 
-				<a class="delete"  title="Delete" data-toggle="tooltip" onclick=fetchu('/movies/{{ movie.id }}')><i class="far fa-trash-alt"></i></a>
-				<a class="edit" title="Edit" data-toggle="tooltip" href='/movies/{{ movie.id }}/edit'><i class="fas fa-edit"></i> </a>
-
+			<div class="row">  
+				<div class="col-md-4" >
+					<a  style="color:blue" href="/movies/{{ movie.id }}">
+						<i class="fas fa-film"></i>
+						{{movie.title}} 
+					</a>
+				</div>
+				<div class="col-md-1">
+					<a style="color:green" class="edit" title="Edit" data-toggle="tooltip" href='/movies/{{ movie.id }}/edit'><i class="fas fa-edit"></i> </a>
+				</div>
+				<div class="col-md-1">	 
+					<a class="delete"  title="Delete" data-toggle="tooltip" onclick=fetchu('/movies/{{ movie.id }}')><i class="far fa-trash-alt"></i></a>
+				</div>				
 			</div>
 			<br>
 		</li>
@@ -24,20 +27,6 @@
 	</ul>
 {% endfor %}
 
-<style>
- .edit{
-	 
-	 width :60px;
-	 color :green;
-	 float :right;
- }
-  .delete{
-	 
-	 width : 1000px;
-	 color : blue;
-	 float : right;
- }
-</style>
 <script type="text/javascript">
 	function fetchu(url) {
 		console.log("delete function")
@@ -46,23 +35,13 @@
 			 mode: 'cors',
 			
 		})
-		  .then(response => {
+		.then(response => {
 
-			 window.location.reload(true);
-		  })
-		  .catch((error) => {
-				console.error('Error2:', error);
-		  });
-		 
+			window.location.reload(true);
+		})
+		.catch((error) => {
+			console.error('Error2:', error);
+		});		 
 	}
-	function editt(url) {
-		console.log("edit function: ",url)
-		fetch(url,{
-			method:'GET',
-			 mode: 'cors', // no-cors, *cors, same-origin,
-			
-		});
-	}
-
 </script>
 {% endblock %}
