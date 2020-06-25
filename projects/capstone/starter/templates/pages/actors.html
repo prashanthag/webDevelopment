@@ -22,21 +22,5 @@
 	</li>
 	{% endfor %}
 </ul>
-<script type="text/javascript">
-	function fetchu(url) {
-		console.log("delete function")
-		fetch(url,{
-			method:'DELETE',
-			 mode: 'cors',
-			 redirect:'follow',			
-		})
-		.then(response => {
-			window.location.reload(true);
-		})
-		.catch((error) => {
-			console.error('Error:', error);
-		});
-		
-	}
-</script>
+
 {% endblock %}

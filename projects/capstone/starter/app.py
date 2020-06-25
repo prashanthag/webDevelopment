@@ -9,7 +9,7 @@ import json
 import logging
 from logging import Formatter, FileHandler
 from flask_wtf import Form
-#import FlaskForm as Form
+# import FlaskForm as Form
 from forms import *
 from flask_migrate import Migrate
 import sys
@@ -20,20 +20,22 @@ from database.models import setup_db, db_drop_and_create_all, Movies, Actors, db
 from auth.auth import AuthError, requires_auth
 
 app = Flask(__name__)
-#CORS(app)
 moment = Moment(app)
 app.config.from_object('config')
 setup_db(app)
 
 CORS(app, resources={r'/api/*': {'origins': '*'}})
 
-#@TODO: Use the after_request decorator to set Access-Control-Allow
+# @TODO: Use the after_request decorator to set Access-Control-Allow
+
 
 @app.after_request
 def app_after_request(response):
-  response.headers.add('Access-Control-Allow-Header','Content-Type,Authorization,true')
-  response.headers.add('Access-Control_Allow-Methods','GET,POST,PATCH,DELETE,PUT,OPTIONS')
-  return response 
+    response.headers.add('Access-Control-Allow-Header',
+                         'Content-Type,Authorization,true')
+    response.headers.add('Access-Control_Allow-Methods',
+                         'GET,POST,PATCH,DELETE,PUT,OPTIONS')
+    return response
 
 
 def format_datetime(value, format='medium'):
@@ -53,7 +55,7 @@ def index():
     return render_template('pages/home.html')
 
 
-@app.route('/movies',methods=['GET','DELETE'])
+@app.route('/movies', methods=['GET'])
 def movies():
     areas = db.session.query(Movies.title, Movies.release_date).distinct()
     data = []
@@ -123,15 +125,16 @@ def show_movie(movie_id):
 
 
 @app.route('/movies/create', methods=['GET'])
+@requires_auth('post:movies')
 def create_movie_form():
     form = MovieForm()
     return render_template('forms/new_movie.html', form=form)
 
 
 @app.route('/movies/create', methods=['POST'])
+@requires_auth('post:movies')
 def create_movie_submission():
     try:
-
         new_movie = Movies(
             title=request.form['title'],
             release_date=request.form['release_date'],
@@ -149,6 +152,8 @@ def create_movie_submission():
             + ' could not be listed.'
 
         )
+        print("abort 422")
+        abort(422)
     finally:
         db.session.close()
 
@@ -156,6 +161,7 @@ def create_movie_submission():
 
 
 @app.route('/movies/<movie_id>', methods=['DELETE'])
+@requires_auth('delete:movies')
 def delete_movie(movie_id):
     try:
         print("movie to deleted: ", movie_id)
@@ -166,60 +172,49 @@ def delete_movie(movie_id):
     except:
         print(sys.exc_info())
         db.session.rollback()
+        abort(404)
     finally:
-        db.session.close()        
-        return jsonify({ 'success': True })
+        db.session.close()
+    return render_template('pages/home.html')
 
 
 @app.route('/movies/<int:movie_id>/edit', methods=['GET'])
+@requires_auth('patch:movies')
 def edit_movie(movie_id):
     movie = Movies.query.get(movie_id)
     form = MovieForm(obj=movie)
-    print("Edit movie: ",movie_id)
+    print("Edit movie: ", movie_id)
 
     return render_template('forms/edit_movie.html', form=form, movie=movie)
 
 
-@app.route('/movies/<int:movie_id>/edit', methods=['POST'])
+@app.route('/movies/<int:movie_id>/edit', methods=['PATCH'])
+@requires_auth('patch:movies')
 def edit_movie_submission(movie_id):
     try:
         movie = Movies.query.get(movie_id)
         form = MovieForm(obj=movie)
 
-        movie.title = request.form['title']
-        movie.release_date = request.form['release_date']
+        if(request.form.get('title')):
+            movie.title = request.form['title']
+        if(request.form.get('release_date')):
+            movie.release_date = request.form['release_date']
 
         db.session.commit()
-        flash('Actor ' + request.form['title'] + ' was successfully edited!')
+        flash('Actor ' + movie.title + ' was successfully edited!')
 
     except:
         print(sys.exc_info())
         db.session.rollback()
-        flash(
-            'An error occurred. Actor '
-            + request.form['title']
-            + ' could not be edited.'
-        )
+        abort(422)
     finally:
         db.session.close()
 
     return redirect(url_for('show_movie', movie_id=movie_id))
 
-
+# ---------------------------------------------------------------
 #  Actors
 #  ----------------------------------------------------------------
-
-@app.route('/actors/<actor_id>', methods=['DELETE'])
-def delete_actor(actor_id):
-    try:
-        actor = Actors.query.filter_by(id=actor_id).first_or_404()
-        db.session.delete(actor)
-        db.session.commit()
-    except:
-        db.session.rollback()
-    finally:
-        db.session.close()
-    return None
 
 
 @app.route('/actors')
@@ -267,36 +262,41 @@ def show_actor(actor_id):
     return render_template('pages/show_actor.html', actor=data)
 
 
-#  Update
-#  ----------------------------------------------------------------
-
+# Update /edit actors
 
 @ app.route('/actors/<int:actor_id>/edit', methods=['GET'])
+@requires_auth('patch:actors')
 def edit_actor(actor_id):
     actor = Actors.query.get(actor_id)
     form = ActorForm(obj=actor)
     return render_template('forms/edit_actor.html', form=form, actor=actor)
 
 
-@ app.route('/actors/<int:actor_id>/edit', methods=['POST'])
+@ app.route('/actors/<int:actor_id>/edit', methods=['PATCH'])
+@requires_auth('patch:actors')
 def edit_actor_submission(actor_id):
     try:
         actor = Actors.query.get(actor_id)
         form = ActorForm(obj=actor)
-        actor.name = request.form['name']
-        actor.age = request.form['age']
-        actor.gender = request.form['gender']
-        db.session.commit()
+        if(request.form.get('name')):
+            actor.name = request.form['name']
 
-        flash('Actor ' + request.form['name'] + ' was successfully edited!')
+        if(request.form.get('age')):
+            actor.age = request.form['age']
+        if(request.form.get('gender')):
+            actor.gender = request.form['gender']
+        db.session.commit()
+        flash('Actor ' + actor.name + ' was successfully edited!')
 
     except:
+        print(sys.exc_info())
         db.session.rollback()
         flash(
             'An error occurred. Actor '
-            + request.form['name']
+            + actor.name
             + ' could not be edited.'
         )
+        abort(422)
 
     finally:
         db.session.close()
@@ -305,26 +305,23 @@ def edit_actor_submission(actor_id):
 
 
 #  Create Actor
-#  ----------------------------------------------------------------
-
-
 @ app.route('/actors/create', methods=['GET'])
+@requires_auth('post:actors')
 def create_actor_form():
     form = ActorForm()
     return render_template('forms/new_actor.html', form=form)
 
 
 @ app.route('/actors/create', methods=['POST'])
+@requires_auth('post:actors')
 def create_actor_submission():
     try:
-        seeking_venue = False
-
+        print("request form post: ",request.form)
         new_actor = Actors(
             name=request.form['name'],
             age=request.form['age'],
             gender=request.form['gender'],
         )
-
         db.session.add(new_actor)
         db.session.commit()
         flash('Actor ' + request.form['name'] + ' was successfully listed!')
@@ -340,6 +337,21 @@ def create_actor_submission():
     finally:
         db.session.close()
 
+    return render_template('pages/home.html')
+# delete actors
+
+
+@app.route('/actors/<actor_id>', methods=['DELETE'])
+@requires_auth('delete:actors')
+def delete_actor(actor_id):
+    try:
+        actor = Actors.query.filter_by(id=actor_id).first_or_404()
+        db.session.delete(actor)
+        db.session.commit()
+    except:
+        db.session.rollback()
+    finally:
+        db.session.close()
     return render_template('pages/home.html')
 
 

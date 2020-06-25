@@ -27,21 +27,5 @@
 	</ul>
 {% endfor %}
 
-<script type="text/javascript">
-	function fetchu(url) {
-		console.log("delete function")
-		fetch(url,{
-			method:'DELETE',
-			 mode: 'cors',
-			
-		})
-		.then(response => {
 
-			window.location.reload(true);
-		})
-		.catch((error) => {
-			console.error('Error2:', error);
-		});		 
-	}
-</script>
 {% endblock %}

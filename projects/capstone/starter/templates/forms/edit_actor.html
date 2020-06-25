@@ -2,7 +2,7 @@
 {% block title %}Edit Actor{% endblock %}
 {% block content %}
   <div class="form-wrapper">
-    <form class="form" method="post" action="/actors/{{actor.id}}/edit">
+    <form class="form" method="patch" action="/actors/{{actor.id}}/edit">
       <h3 class="form-heading">Edit actor <em>{{ actor.name }}</em></h3>
       <div class="form-group">
         <label for="name">Name</label>

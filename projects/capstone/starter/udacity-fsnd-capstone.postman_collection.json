@@ -1,0 +1,1324 @@
+{
+	"info": {
+		"_postman_id": "78be2c2b-44a6-4edf-8edb-eca6f3c3c030",
+		"name": "udacity-fsnd-capstone",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Casting Producer",
+			"item": [
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ae5ab615-74de-4136-8bd5-c980eabd2b2b",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6fdde13d-c437-4ef6-a3c0-82130fde0800",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors/create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "096e6f39-3e83-4e38-8bf6-6763a22ac22a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "age",
+									"value": "9",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "Female",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Ina Gowda",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies/create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ddb9591b-4f4e-4f89-98cf-5474aab338f2",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Jungle",
+									"type": "text"
+								},
+								{
+									"key": "release_date",
+									"value": "07/24/2020",
+									"type": "text"
+								},
+								{
+									"key": "actor_id",
+									"value": "1",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors/1/edit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cf02e206-3bf1-4524-ac0e-9972c6beea51",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "age",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors/1/edit",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"1",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies/1/edit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b628b5f3-5e2f-4739-a0be-e9ba86a20d5b",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "age",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies/1/edit",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"1",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b4691bdc-7f16-4300-b3a7-10baa5c425d7",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "age",
+									"value": "manga",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dcb3ad70-13b5-42ce-8016-a0060019b512",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "age",
+									"value": "manga",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InVjekhuLUQxZ1Z3elNBRE5nZ2FKRyJ9.eyJpc3MiOiJodHRwczovL3ByYXNhdXRoLmF1dGgwLmNvbS8iLCJzdWIiOiJnb29nbGUtb2F1dGgyfDEwNTI2MzMxMTY0MzQxMjEyMjgxMSIsImF1ZCI6WyJjYXN0aW5nIiwiaHR0cHM6Ly9wcmFzYXV0aC5hdXRoMC5jb20vdXNlcmluZm8iXSwiaWF0IjoxNTkzMDM5MTA2LCJleHAiOjE1OTMxMjU1MDYsImF6cCI6ImNuNnp2SjQ0ejdBak5ySzIwVWZtRFcwRFowTTAyYjJJIiwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6bW92aWVzIiwiZ2V0OmFjdG9ycyIsImdldDptb3ZpZXMiLCJwYXRjaDphY3RvcnMiLCJwYXRjaDptb3ZpZXMiLCJwb3N0OmFjdG9ycyIsInBvc3Q6bW92aWVzIl19.oHUtndZZ0jpCVmxo92A3Eg4P08n-GTfsdA1E9rHzZ5yignSkf0G8mcBMPtxpGtrjEjWenwTRImGrRGAM00Y9YG_IqpOS8eZuuNBpCicXYix-yluIbXPbsF_9CbPheFaMXGLnxuXIYlTiP2RvV4rRU9-FHP2e1bjwPLd4bI48vT0jzKjptpOG2LgyjCLjK6tg-zXX6nG27x4oW75FH9Wg7CWEANKxNT9HvKVG65Na7Zxzlxw69D4TGOK76xNBfrJMAVK78QxCQQhYF5ObsKfPxDlaCUgAfkTSv9HSgpwekRpthPeTnNfnJxqxwiez0DV-Fr8L99nd5qTQ7UtruQeWrQ",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "10a9ddec-cb9f-4930-a071-61c094cf6d89",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "05087b3f-26d2-41c0-a406-965777f06ab9",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Casting Director",
+			"item": [
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4fb72290-220a-47c3-8f21-6409ae70c9a6",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2e5c97aa-db36-4ecd-b8f5-e026c563bc8b",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors/create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dddfa559-302a-414f-93e4-cc7d586c3f3f",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "age",
+									"value": "9",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "Female",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Ina Gowda",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies/create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "33752eed-15ef-40dc-ab27-2c316cb462b3",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Jungle",
+									"type": "text"
+								},
+								{
+									"key": "release_date",
+									"value": "07/24/2020",
+									"type": "text"
+								},
+								{
+									"key": "actor_id",
+									"value": "1",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors/1/edit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6c21ff51-6cd5-407c-9b52-9d39aaa55e6c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "age",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors/1/edit",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"1",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies/1/edit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f3cadf3-d3df-47cb-b290-2168911b70ed",
+								"exec": [
+									"pm.test(\"Status code is 200 or 422 \", function () {\r",
+									"     pm.expect(pm.response.code).to.be.oneOf([200,422]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "age",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies/1/edit",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"1",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b9503a09-055a-4a7a-991b-e0e893a41609",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "age",
+									"value": "manga",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "957ffc5c-299f-436b-998f-027a96e28c9c",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "age",
+									"value": "manga",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InVjekhuLUQxZ1Z3elNBRE5nZ2FKRyJ9.eyJpc3MiOiJodHRwczovL3ByYXNhdXRoLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWYwNTRiMGE3YzNjNTAwMTlkMGQ1YjQiLCJhdWQiOiJjYXN0aW5nIiwiaWF0IjoxNTkzMDY2NzA2LCJleHAiOjE1OTMxNTMxMDYsImF6cCI6ImNuNnp2SjQ0ejdBak5ySzIwVWZtRFcwRFowTTAyYjJJIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6YWN0b3JzIiwiZ2V0OmFjdG9ycyIsImdldDptb3ZpZXMiLCJwYXRjaDphY3RvcnMiLCJwYXRjaDptb3ZpZXMiLCJwb3N0OmFjdG9ycyJdfQ.gWElhBysr7XSSH5F4WECx8mDAAnV71I6RI7Rj8KJJpZzON8B66_csrGtPWS7wQbcsFt8BWfNxt-Xquvsfn_-yUhxbXKcoGS_3aWWyOmbOTHpzM0m1zUEEqI2h_U4SC85mnchqFmsUqrub8gztxsz4r-1mt6Kk_6aZJ_Fcan9M17rWqEGeak-4oC6h5SGlZfnCgcbJQNHARs7VSgdy-cYFigxiyfzJ1qpHarRTGt-f078aTqOVgVzuyBx9qBqdisY5PYeU4VJjsd0j6e6WYWalMSxo2HCLopA4xcibR4f0_dJcmwFnoiIcD9bGOugcxvAn3PmYI18hM45XejjbVTs1w",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "312dd9e7-333c-496c-8499-abadb7492980",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "6c81dd7f-8a30-4efe-8ac8-597fb608b088",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Casting Assistant",
+			"item": [
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7c7da85a-02dd-4671-be72-23401a11906c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "176e237c-d607-4118-aa44-e1cdf7f18e1c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors/create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e20d8db4-94aa-4fb1-9c0f-3f62cc53f8f5",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "age",
+									"value": "9",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "Female",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Ina Gowda",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies/create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8977ef47-784c-4bc1-b94a-b553b16be827",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Jungle",
+									"type": "text"
+								},
+								{
+									"key": "release_date",
+									"value": "07/24/2020",
+									"type": "text"
+								},
+								{
+									"key": "actor_id",
+									"value": "1",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors/1/edit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6b9fd0eb-e8a1-44bb-97be-3d4e8d8e4fad",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "age",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors/1/edit",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"1",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies/1/edit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2f2fe0af-241d-4b2c-9d76-fa128fc06d75",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "age",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies/1/edit",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"1",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "29d85962-d863-490c-8a6a-38e9646ce9b1",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "age",
+									"value": "manga",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cc536ed2-d12d-44b9-b7ce-35a4f8a33c4c",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "age",
+									"value": "manga",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "6a742c5c-d9a8-4e7f-9ea9-6754595a2e69",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "6b3015a3-e4c4-4dd0-bb1d-894868111d77",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "a8f17d64-6dc1-4a60-81a0-b60e602ac20b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "7830ada9-0f08-496a-b861-4c017b5b9251",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "545cfab8-c409-4828-aaf9-6de71feabfd1",
+			"key": "host",
+			"value": "localhost:5000",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
