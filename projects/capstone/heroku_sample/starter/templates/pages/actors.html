@@ -1,0 +1,26 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Casting Agency | Actors{% endblock %}
+{% block content %}
+<ul class="items">
+	{% for actor in actors %}
+	<li>
+	  <div class="row">
+		<div class="col-md-4">
+			<a  style="color:blue" href="/actors/{{ actor.id }}">
+				<i class="fas fa-users"></i>		
+					{{ actor.name }}			
+			</a>
+		</div>
+		<div class="col-md-1">
+			<a  style="color:green" class="edit" title="Edit" data-toggle="tooltip" href='/actors/{{ actor.id }}/edit'><i class="fas fa-edit"></i> </a>
+		 </div>
+		<div class="col-md-1">
+			<a class="delete"  title="Delete" data-toggle="tooltip" onclick=fetchu('/actors/{{ actor.id }}')><i class="far fa-trash-alt"></i></a>
+		 </div>
+
+	  </div>
+	</li>
+	{% endfor %}
+</ul>
+
+{% endblock %}

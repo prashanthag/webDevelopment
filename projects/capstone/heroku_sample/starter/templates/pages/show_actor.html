@@ -1,0 +1,24 @@
+{% extends 'layouts/main.html' %}
+{% block title %}{{ actor.name }} | Actor{% endblock %}
+{% block content %}
+<div class="row">
+	<div class="col-sm-6">
+		<h1 class="monospace">
+			{{ actor.name }}
+		</h1>
+		<p class="subtitle">
+			ID: {{ actor.id }}
+		</p>
+		<p>
+			<i class="fas fa-users"></i></i>{% if actor.name %}	{{actor.name}}{% else %}No Movies{% endif %}<br>
+			<i class="fas fa-film"></i>{% if actor.age %}	{{actor.age}}{% else %}No Movies{% endif %}<br>
+			{% if actor.gender == "female" %}
+			<i class="fas fa-female"></i>{% if actor.gender %}	{{actor.gender}}{% else %}No Movies{% endif %}<br>
+			{% else %}
+			<i class="fas fa-male"></i>{% if actor.gender %}	{{actor.gender}}{% else %}No Movies{% endif %}<br>
+			{% endif %}
+		</p>
+		</div>
+
+{% endblock %}
+

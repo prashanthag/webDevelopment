@@ -1,0 +1,31 @@
+{% extends 'layouts/main.html' %}
+
+{% block title %}Casting Agency Movies{% endblock %}
+{% block content %}
+{% for area in areas %}
+	<ul class="items">
+		{% for movie in area.movies %}
+		<li>
+			<div class="row">  
+				<div class="col-md-4" >
+					<a  style="color:blue" href="/movies/{{ movie.id }}">
+						<i class="fas fa-film"></i>
+						{{movie.title}} 
+					</a>
+				</div>
+				<div class="col-md-1">
+					<a style="color:green" class="edit" title="Edit" data-toggle="tooltip" href='/movies/{{ movie.id }}/edit'><i class="fas fa-edit"></i> </a>
+				</div>
+				<div class="col-md-1">	 
+					<a class="delete"  title="Delete" data-toggle="tooltip" onclick=fetchu('/movies/{{ movie.id }}')><i class="far fa-trash-alt"></i></a>
+				</div>				
+			</div>
+			<br>
+		</li>
+		{% endfor %}
+		
+	</ul>
+{% endfor %}
+
+
+{% endblock %}
