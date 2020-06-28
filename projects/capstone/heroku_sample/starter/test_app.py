@@ -20,6 +20,7 @@ class CapstoneTestCase(unittest.TestCase):
         self.client = self.app.test_client
         self.token_cp = os.environ['CP_JWT_TOKEN']
         self.token_cd = os.environ['CD_JWT_TOKEN']
+        self.token_ca = os.environ['CA_JWT_TOKEN']
         self.cp_headers = {
             "Authorization": f"Bearer {self.token_cp}"
         }
@@ -27,7 +28,7 @@ class CapstoneTestCase(unittest.TestCase):
             "Authorization": f"Bearer {self.token_cd}"
         }
         self.ca_headers = {
-
+            "Authorization": f"Bearer {self.token_ca}"
         }
         self.actor1 = dict(
             name='Ina Gowda',

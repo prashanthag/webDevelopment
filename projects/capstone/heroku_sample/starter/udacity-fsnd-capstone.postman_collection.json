@@ -1260,7 +1260,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InVjekhuLUQxZ1Z3elNBRE5nZ2FKRyJ9.eyJpc3MiOiJodHRwczovL3ByYXNhdXRoLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWE2NDkwNTZiNjliYzBjMTJkODdjODkiLCJhdWQiOiJjYXN0aW5nIiwiaWF0IjoxNTkzMzIxODgwLCJleHAiOjE1OTM0MDgyODAsImF6cCI6ImNuNnp2SjQ0ejdBak5ySzIwVWZtRFcwRFowTTAyYjJJIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6YWN0b3JzIiwiZ2V0Om1vdmllcyJdfQ.m0yZ9I4UbkGh6KMql89HlUdYkIb2ApuBdc2eW8hHETWlxu2RSF_bjMv1HWaVN2c4ojBIWNZ0xD9mu9G7pg8z36nY-o_oQ49t6Gd_ueJHDKQ2MOrKeujgffDX9Uku8wJxamzZx6YcVQvxoJnSBtitfnjxp7WWBCj3gkoXeK9AlW1DDlXGjm7aTCc_p30uu9rEUmspUFdnzLwGRbx4UjwDFTIrFq3ev5ezr6WQQiv3hZRfdOUyV6UncOng7t2qwHnp61ydvOm2Web3_QOu7iYXbuOCErktywlpp7Y3AoWPs-tC7LvqmyGCm3xCVzBQu47sXarYMMEucOyqOKatD2LEvQ",
 						"type": "string"
 					}
 				]
@@ -1314,12 +1314,12 @@
 	],
 	"variable": [
 		{
-			"id": "fa436d60-c277-4f23-94d5-e3897160c32b",
+			"id": "b10c50c8-48f9-4382-881a-b65cd47e672b",
 			"key": "host",
 			"value": "https://intense-earth-93621.herokuapp.com/"
 		},
 		{
-			"id": "0a030b9f-e962-4384-87de-6307d31ffae3",
+			"id": "95a4021d-a4ed-4e9a-9764-49c0c2e3ca54",
 			"key": "host",
 			"value": "localhost:5000",
 			"disabled": true
