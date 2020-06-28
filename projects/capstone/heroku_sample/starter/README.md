@@ -102,17 +102,15 @@ One note before you delve into your tasks: for each endpoint you are expected to
 ## Example API endpoints and expected behavior
 Since Front end is implemented, any end point request will not return any data as endpoint redirects to other path or render html . We can test this by visiting and running url  https://intense-earth-93621.herokuapp.com/. It only returns success 200 or error messages 4xx
 
-![/actors ](/static/img/get_actors.png)
-
 
 
 ### GET `/actors`  
 
-Returns a 200 OK if is success and categories names, status and total categories.
+Returns a 200 OK if is success. If you added any actors , you can see that in heroku url as in below pic
 
 Example:
 
-
+![/actors](/projects/capstone/heroku_sample/starter/static/img/get_actors.png)
 
 
 
