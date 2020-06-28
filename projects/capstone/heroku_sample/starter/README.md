@@ -114,12 +114,15 @@ in test_app.py
     ```
     source setup.sh
     ```
-- To run the tests, there are two ways of running this project. Before this you need to clear database and run the test case otherwise you get some test cases getting failed
+- To run the tests, there are two ways of running this project. Before this you need to clear database mentioned in setup.sh and run the test case otherwise you get some test cases might getting failed when you run second time
+    
+    - import file ```udacity-fsnd-capstone.postman_collection.json``` in postman and run test cases
+    
     - By python unittest
     
         ```bash
         python3 test_app.py
         ```
 
-    - import file ```udacity-fsnd-capstone.postman_collection.json``` in postman and run test cases
+
        

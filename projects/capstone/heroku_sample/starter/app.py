@@ -355,7 +355,32 @@ def delete_actor(actor_id):
     finally:
         db.session.close()
     return render_template('pages/home.html')
+'''
+Error handlers.
+'''
+@app.errorhandler(401)
+def bad_request(error):
+    return jsonify({
+        'success': False,
+        'error': 401,
+        'message': 'bad request'
+    }), 401
 
+@app.errorhandler(422)
+def unprocessable(error):
+    return jsonify({
+        'success': False,
+        'error': 422,
+        'message': 'unprocessable'
+    }), 422
+
+@app.errorhandler(404)
+def not_found(error):
+    return jsonify({
+        'success': False,
+        'error': 404,
+        'message': 'resource not found'
+    }), 404
 
 if __name__ == '__main__':
     app.run(debug=True)
