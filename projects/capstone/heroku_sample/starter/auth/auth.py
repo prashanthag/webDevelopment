@@ -1,13 +1,19 @@
 import json
+import os
+import sys
 from flask import request, _request_ctx_stack, abort
 from functools import wraps
 from jose import jwt
 from urllib.request import urlopen
 
 
-AUTH0_DOMAIN = 'prasauth.auth0.com'
-ALGORITHMS = ['RS256']
-API_AUDIENCE = 'casting'
+# AUTH0_DOMAIN = 'prasauth.auth0.com'
+# ALGORITHMS = ['RS256']
+# API_AUDIENCE = 'casting'
+
+AUTH0_DOMAIN = os.environ['AUTH0_DOMAIN']
+ALGORITHMS = os.environ['ALGORITHMS']
+API_AUDIENCE = os.environ['API_AUDIENCE']
 
 # AuthError Exception
 '''
@@ -35,7 +41,7 @@ class AuthError(Exception):
 
 
 def get_token_auth_header():
-    #raise Exception('Not Implemented')
+    # raise Exception('Not Implemented')
     """Obtains the Access Token from the Authorization Header
     """
     auth = request.headers.get('Authorization', None)
@@ -75,15 +81,15 @@ def get_token_auth_header():
         permission: string permission (i.e. 'post:drink')
         payload: decoded jwt payload
 
-    it should raise an AuthError if permissions are not included in the payload
-        !!NOTE check your RBAC settings in Auth0
-    it should raise an AuthError if the requested permission string is not in the payload permissions array
-    return true otherwise
+    it should raise an AuthError if permissions are not included in the
+    payload!!NOTE check your RBAC settings in Auth0 it should raise an
+    AuthError if the requested permission string is not in the payload
+    permissions array  return true otherwise
 '''
 
 
 def check_permissions(permission, payload):
-    #raise Exception('Not Implemented')
+    # raise Exception('Not Implemented')
     if 'permissions' not in payload:
         print("Permissions not included in JWT.")
         raise AuthError({
@@ -112,12 +118,14 @@ def check_permissions(permission, payload):
     it should validate the claims
     return the decoded payload
 
-    !!NOTE urlopen has a common certificate error described here: https://stackoverflow.com/questions/50236117/scraping-ssl-certificate-verify-failed-error-for-http-en-wikipedia-org
+    !!NOTE urlopen has a common certificate error described here:
+    https://stackoverflow.com/questions/50236117/scraping-ssl-certificate-\
+    verify-failed-error-for-http-en-wikipedia-org
 '''
 
 
 def verify_decode_jwt(token):
-    #raise Exception('Not Implemented')
+    # raise Exception('Not Implemented')
     jsonurl = urlopen(f'https://{AUTH0_DOMAIN}/.well-known/jwks.json')
     jwks = json.loads(jsonurl.read())
     unverified_header = jwt.get_unverified_header(token)
@@ -161,7 +169,8 @@ def verify_decode_jwt(token):
         except jwt.JWTClaimsError:
             raise AuthError({
                 'code': 'invalid_claims',
-                'description': 'Incorrect claims. Please, check the audience and issuer.'
+                'description': 'Incorrect claims. Please, check the \
+                    audience and issuer.'
             }, 401)
 
         except Exception:
@@ -178,8 +187,9 @@ def verify_decode_jwt(token):
 
     it should use the get_token_auth_header method to get the token
     it should use the verify_decode_jwt method to decode the jwt
-    it should use the check_permissions method validate claims and check the requested permission
-    return the decorator which passes the decoded payload to the decorated method
+    it should use the check_permissions method validate claims and
+    check the requested permission return the decorator which passes
+    the decoded payload to the decorated method
 
 def requires_auth(permission=''):
     def requires_auth_decorator(f):
@@ -199,16 +209,17 @@ def requires_auth(permission=''):
     def requires_auth_decor(f):
         @wraps(f)
         def wrapper(*args, **kwargs):
-            payload=""
+            payload = ""
             try:
                 token = get_token_auth_header()
-                #print("token: ", token)
+                # print("token: ", token)
                 payload = verify_decode_jwt(token)
                 check_permissions(permission, payload)
-                #print("check permission passed")
-                #print(payload)
-                
-            except:
+                # print("check permission passed")
+                # print(payload)
+
+            except Exception:
+                print(sys.exc_info())
                 abort(401)
             return f(*args, **kwargs)
         return wrapper

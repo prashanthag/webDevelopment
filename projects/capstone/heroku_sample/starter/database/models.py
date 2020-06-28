@@ -5,47 +5,51 @@ import json
 from flask_migrate import Migrate
 
 
-
 db = SQLAlchemy()
 
 '''
 setup_db(app)
     binds a flask application and a SQLAlchemy service
 '''
+
+
 def setup_db(app):
     db.app = app
     db.init_app(app)
     migrate = Migrate(app, db)
-    #db_drop_and_create_all()
-    #db.create_all()
-
-
+    db_drop_and_create_all()
+    # db.create_all()
 
 
 '''
 db_drop_and_create_all()
     drops the database tables and starts fresh
     can be used to initialize a clean database
-    !!NOTE you can change the database_filename variable to have multiple verisons of a database
+    !!NOTE you can change the database_filename variable to have multiple
+    verisons of a database
 '''
+
+
 def db_drop_and_create_all():
     db.drop_all()
     db.create_all()
+
 
 '''
 Movies
 a persistent Movies entity, extends the base SQLAlchemy Model
 '''
+
+
 class Movies(db.Model):
     __tablename__ = 'Movies'
     # Autoincrementing, unique primary key
     id = db.Column(db.Integer, primary_key=True)
     # String Title
     title = Column(String(120), unique=True)
-    # the ingredients blob - this stores a lazy json blob
-    # the required datatype is [{'color': string, 'name':string, 'parts':number}]
-    release_date =  Column(db.DateTime(), nullable=False)
-    actor_id = db.Column(db.Integer, db.ForeignKey('Actors.id'), nullable=False)
+    release_date = Column(db.DateTime(), nullable=False)
+    actor_id = db.Column(db.Integer, db.ForeignKey(
+        'Actors.id'), nullable=False)
 
     '''
     insert()
@@ -56,6 +60,7 @@ class Movies(db.Model):
             movie = Movie(title=req_title, recipe=req_recipe)
             movie.insert()
     '''
+
     def insert(self):
         db.session.add(self)
         db.session.commit()
@@ -68,6 +73,7 @@ class Movies(db.Model):
             movie = Movie(title=req_title, recipe=req_recipe)
             movie.delete()
     '''
+
     def delete(self):
         db.session.delete(self)
         db.session.commit()
@@ -81,6 +87,7 @@ class Movies(db.Model):
             movie.title = 'Black Coffee'
             movie.update()
     '''
+
     def update(self):
         db.session.commit()
 
@@ -97,9 +104,7 @@ class Actors(db.Model):
     name = Column(String(120), unique=True)
 
     age = Column(db.Integer)
-    # the ingredients blob - this stores a lazy json blob
-    # the required datatype is [{'color': string, 'name':string, 'parts':number}]
-    gender =  Column(String(120), nullable=False)
+    gender = Column(String(120), nullable=False)
     movies = db.relationship('Movies', backref='Actors', lazy=True)
     '''
     insert()
@@ -110,6 +115,7 @@ class Actors(db.Model):
             movie = Movie(title=req_title, recipe=req_recipe)
             movie.insert()
     '''
+
     def insert(self):
         db.session.add(self)
         db.session.commit()
@@ -122,6 +128,7 @@ class Actors(db.Model):
             movie = Movie(title=req_title, recipe=req_recipe)
             movie.delete()
     '''
+
     def delete(self):
         db.session.delete(self)
         db.session.commit()
@@ -135,10 +142,9 @@ class Actors(db.Model):
             movie.title = 'Black Coffee'
             movie.update()
     '''
+
     def update(self):
         db.session.commit()
 
     def __repr__(self):
         return json.dumps(self.short())
-
-

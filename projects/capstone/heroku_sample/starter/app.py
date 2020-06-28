@@ -1,7 +1,8 @@
 import json
 import dateutil.parser
 import babel
-from flask import Flask, render_template, request, Response, flash, redirect, url_for, jsonify, abort
+from flask import Flask, render_template, request, \
+    Response, flash, redirect, url_for, jsonify, abort
 from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
@@ -16,7 +17,8 @@ import sys
 from sqlalchemy import func
 import datetime
 
-from database.models import setup_db, db_drop_and_create_all, Movies, Actors, db
+from database.models import setup_db, db_drop_and_create_all, \
+    Movies, Actors, db
 from auth.auth import AuthError, requires_auth
 
 app = Flask(__name__)
@@ -111,7 +113,7 @@ def show_movie(movie_id):
             'release_date': movie.release_date
         }
         # data['image_link']='/static/img/uda1.png'
-    except:
+    except Exception:
         print("\n\n\n\n\n")
         print(sys.exc_info())
 
@@ -143,7 +145,7 @@ def create_movie_submission():
         db.session.add(new_movie)
         db.session.commit()
         flash('Movies ' + request.form['title'] + ' was successfully listed!')
-    except:
+    except Exception:
         print(sys.exc_info())
         db.session.rollback()
         flash(
@@ -169,7 +171,7 @@ def delete_movie(movie_id):
         db.session.delete(movie)
         db.session.commit()
         flash('Movies  was successfully deleted!')
-    except:
+    except Exception:
         print(sys.exc_info())
         db.session.rollback()
         abort(404)
@@ -203,7 +205,7 @@ def edit_movie_submission(movie_id):
         db.session.commit()
         flash('Actor ' + movie.title + ' was successfully edited!')
 
-    except:
+    except Exception:
         print(sys.exc_info())
         db.session.rollback()
         abort(422)
@@ -288,7 +290,7 @@ def edit_actor_submission(actor_id):
         db.session.commit()
         flash('Actor ' + actor.name + ' was successfully edited!')
 
-    except:
+    except Exception:
         print(sys.exc_info())
         db.session.rollback()
         flash(
@@ -316,7 +318,7 @@ def create_actor_form():
 @requires_auth('post:actors')
 def create_actor_submission():
     try:
-        print("request form post: ",request.form)
+        # print("request form post: ", request.form)
         new_actor = Actors(
             name=request.form['name'],
             age=request.form['age'],
@@ -325,7 +327,7 @@ def create_actor_submission():
         db.session.add(new_actor)
         db.session.commit()
         flash('Actor ' + request.form['name'] + ' was successfully listed!')
-    except:
+    except Exception:
         print(sys.exc_info())
         db.session.rollback()
         flash(
@@ -348,7 +350,7 @@ def delete_actor(actor_id):
         actor = Actors.query.filter_by(id=actor_id).first_or_404()
         db.session.delete(actor)
         db.session.commit()
-    except:
+    except Exception:
         db.session.rollback()
     finally:
         db.session.close()

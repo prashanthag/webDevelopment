@@ -8,12 +8,13 @@ DEBUG = True
 
 # Connect to the database
 
-
 # TODO IMPLEMENT DATABASE URL
-#database_name = "capstone"
+#   database_name = "capstone"
 database_path = os.environ['DATABASE_URL']
-#SQLALCHEMY_DATABASE_URI = 'postgres://postgres@localhost:5432/capstone'
-#database_path = "postgres://{}:{}@{}/{}".format('postgres', 'postgres','localhost:5432', database_name)
-
+# SQLALCHEMY_DATABASE_URI = 'postgres://postgres@localhost:5432/capstone'
+'''
+database_path = "postgres://{}:{}@{}/{}".format('postgres', \
+  'postgres','localhost:5432', database_name)
+'''
 SQLALCHEMY_DATABASE_URI = database_path
-SQLALCHEMY_TRACK_MODIFICATIONS=False
+SQLALCHEMY_TRACK_MODIFICATIONS = False
