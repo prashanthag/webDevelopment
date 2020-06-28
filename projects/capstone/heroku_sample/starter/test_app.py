@@ -185,7 +185,7 @@ class CapstoneTestCase(unittest.TestCase):
     def test_get_assistant_all_actors(self):
         res = self.get_item('/actors', self.ca_headers)
         self.assertEqual(res.status_code, 200)
-    
+
     def test_casting_assistant_create(self):
         res = self.add_item('/actors/create', self.actor1, self.ca_headers)
         self.assertEqual(res.status_code, 401)

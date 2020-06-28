@@ -186,7 +186,6 @@ def edit_movie(movie_id):
     movie = Movies.query.get(movie_id)
     form = MovieForm(obj=movie)
     print("Edit movie: ", movie_id)
-
     return render_template('forms/edit_movie.html', form=form, movie=movie)
 
 
@@ -355,9 +354,13 @@ def delete_actor(actor_id):
     finally:
         db.session.close()
     return render_template('pages/home.html')
+
+
 '''
 Error handlers.
 '''
+
+
 @app.errorhandler(401)
 def bad_request(error):
     return jsonify({
@@ -365,6 +368,7 @@ def bad_request(error):
         'error': 401,
         'message': 'bad request'
     }), 401
+
 
 @app.errorhandler(422)
 def unprocessable(error):
@@ -374,6 +378,7 @@ def unprocessable(error):
         'message': 'unprocessable'
     }), 422
 
+
 @app.errorhandler(404)
 def not_found(error):
     return jsonify({
@@ -381,6 +386,7 @@ def not_found(error):
         'error': 404,
         'message': 'resource not found'
     }), 404
+
 
 if __name__ == '__main__':
     app.run(debug=True)
