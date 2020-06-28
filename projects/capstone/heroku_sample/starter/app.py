@@ -282,9 +282,8 @@ def edit_actor_submission(actor_id):
         form = ActorForm(obj=actor)
         if(request.form.get('name')):
             actor.name = request.form['name']
-
-        if(request.form.get('age')):
-            actor.age = request.form['age']
+            if(request.form.get('age')):
+                actor.age = request.form['age']
         if(request.form.get('gender')):
             actor.gender = request.form['gender']
         db.session.commit()
@@ -292,14 +291,15 @@ def edit_actor_submission(actor_id):
 
     except Exception:
         print(sys.exc_info())
-        db.session.rollback()
-        flash(
-            'An error occurred. Actor '
-            + actor.name
-            + ' could not be edited.'
-        )
+        actor = Actors.query.get(actor_id)
+        if actor is not None:
+            flash(
+                'An error occurred. Actor '
+                + actor.name
+                + ' could not be edited.'
+            )
         abort(422)
-
+        db.session.rollback()
     finally:
         db.session.close()
 

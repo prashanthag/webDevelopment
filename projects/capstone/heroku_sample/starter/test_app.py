@@ -34,16 +34,17 @@ class CapstoneTestCase(unittest.TestCase):
             age='9',
             gender='female'
         )
-        self.actor2 = dict(
-            age='41',
+        self.patch_actor = dict(
+            age='41'
         )
         self.movie1 = dict(
             title='corona',
-            release_date='2020/09/01'
+            release_date='2020/09/01',
+            actor_id='1'
         )
-        self.movie2 = dict(
+        self.patch_movie = dict(
             release_date='2020/12/01'
-        ),
+        )
         '''
         conn = http.client.HTTPSConnection(os.environ['AUTH0_DOMAIN'])
         payload = {
@@ -60,8 +61,8 @@ class CapstoneTestCase(unittest.TestCase):
         res = conn.getresponse()
         data = res.read()
 
-        # self.token  = json.loads(data.decode("utf-8"))['access_token']
-        # print(self.token )
+        tokenn  = json.loads(data.decode("utf-8"))['access_token']
+        print(tokenn)
         # binds the app to the current context
         with self.app.app_context():
             self.db = SQLAlchemy()
@@ -70,18 +71,22 @@ class CapstoneTestCase(unittest.TestCase):
             self.db.drop_all()
             self.db.create_all()
 
-self.new_missing_data = {
-            'question': 'What is my cat name',
-            'difficulty': 4,
-            'category': 1
-        }
+        self.new_missing_data = {
+                    'question': 'What is my cat name',
+                    'difficulty': 4,
+                    'category': 1
+                }
     '''
 
     def tearDown(self):
         """Executed after reach test"""
         pass
 
-    def add_item(self, url, token, data, headers):
+    def get_item(self, url, headers):
+        res = self.client().get(url, headers=headers)
+        return res
+
+    def add_item(self, url, data, headers):
         res = self.client().post(url,
                                  data=data,
                                  headers=headers,
@@ -89,34 +94,125 @@ self.new_missing_data = {
                                  )
         return res
 
-    def delete_item(self, token, data, headers):
+    def patch_item(self, url, data, headers):
+        res = self.client().patch(url,
+                                  data=data,
+                                  headers=headers,
+                                  follow_redirects=True
+                                  )
+        return res
+
+    def delete_item(self, url, headers):
         res = self.client().delete(url,
-                                   data=data,
                                    headers=headers,
                                    follow_redirects=True
                                    )
         return res
+    # Producer
 
-    def test_get_all_movies(self):
-        res = self.client().get('/movies')
+    def test_get_producer_all_movies(self):
+        res = self.get_item('/movies', self.cp_headers)
         self.assertEqual(res.status_code, 200)
 
-    def test_get_all_actors(self):
-        res = self.client().get('/actors')
+    def test_get_producer_all_actors(self):
+        res = self.get_item('/actors', self.cp_headers)
         self.assertEqual(res.status_code, 200)
 
-    def test_casting_producer_create(self):
-        res = self.add_item('/actors/create', self.token_cp,
-                            self.actor1, self.cp_headers)
+    def test_casting_prod_create_actor(self):
+        res = self.add_item('/actors/create', self.actor1, self.cp_headers)
         self.assertEqual(res.status_code, 200)
 
-    def test_casting_director_create(self):
-        res = self.add_item('/actors/create', self.token_cd,
-                            self.actor1, self.cd_headers)
+    def test_casting_prod_create_movie(self):
+        res = self.add_item('/movies/create', self.movie1, self.cp_headers)
         self.assertEqual(res.status_code, 200)
 
+    def test_casting_prod_patch_actor(self):
+        res = self.patch_item(
+            '/actors/1/edit', self.patch_actor, self.cp_headers)
+        self.assertEqual(res.status_code, 200)
+
+    def test_casting_prod_patch_movie(self):
+        res = self.patch_item(
+            '/movies/1/edit', self.patch_movie, self.cp_headers)
+        self.assertEqual(res.status_code, 200)
+
+    def test_casting_producer_delete_movie(self):
+        res = self.delete_item('/movies/1', self.cp_headers)
+        self.assertEqual(res.status_code, 200)
+
+    def test_casting_producer_delete_actor(self):
+        res = self.delete_item('/actors/1', self.cp_headers)
+        self.assertEqual(res.status_code, 200)
+
+    # Director
+    def test_get_director_all_movies(self):
+        res = self.get_item('/movies', self.cd_headers)
+        self.assertEqual(res.status_code, 200)
+
+    def test_get_director_all_actors(self):
+        res = self.get_item('/actors', self.cd_headers)
+        self.assertEqual(res.status_code, 200)
+
+    def test_casting_director_create_actor(self):
+        res = self.add_item('/actors/create', self.actor1, self.cd_headers)
+        self.assertEqual(res.status_code, 200)
+
+    def test_casting_director_create_movie(self):
+        res = self.add_item('/movies/create', self.movie1, self.cd_headers)
+        self.assertEqual(res.status_code, 401)
+
+    def test_casting_director_patch_movie(self):
+        res = self.patch_item(
+            '/movies/1/edit', self.patch_movie, self.cd_headers)
+        self.assertEqual(res.status_code, 422)
+
+    def test_casting_director_patch_actor(self):
+        res = self.patch_item(
+            '/actors/1/edit', self.patch_actor, self.cd_headers)
+        self.assertEqual(res.status_code, 200)
+
+    def test_casting_direct_delete_actor(self):
+        res = self.delete_item('/actors/1', self.cp_headers)
+        self.assertEqual(res.status_code, 200)
+
+    # Assistant
+
+    def test_get_assistant_all_movies(self):
+        res = self.get_item('/movies', self.ca_headers)
+        self.assertEqual(res.status_code, 200)
+
+    def test_get_assistant_all_actors(self):
+        res = self.get_item('/actors', self.ca_headers)
+        self.assertEqual(res.status_code, 200)
+    
     def test_casting_assistant_create(self):
-        res = self.add_item('/actors/create', '', self.actor2, self.ca_headers)
+        res = self.add_item('/actors/create', self.actor1, self.ca_headers)
+        self.assertEqual(res.status_code, 401)
+
+    def test_casting_assistant_create_actor(self):
+        res = self.add_item('/actors/create', self.actor1, self.ca_headers)
+        self.assertEqual(res.status_code, 401)
+
+    def test_casting_assistant_create_movie(self):
+        res = self.add_item('/movies/create', self.movie1, self.ca_headers)
+        self.assertEqual(res.status_code, 401)
+
+    def test_casting_assistant_patch_actor(self):
+        res = self.patch_item(
+            '/actors/1/edit', self.patch_actor, self.ca_headers)
+        self.assertEqual(res.status_code, 401)
+
+    def test_casting_assistant_patch_movie(self):
+        res = self.patch_item(
+            '/movies/1/edit', self.patch_movie, self.ca_headers)
+        self.assertEqual(res.status_code, 401)
+
+    def test_casting_assistant_delete_movie(self):
+        res = self.delete_item('/movies/1', self.ca_headers)
+        self.assertEqual(res.status_code, 401)
+
+    def test_casting_assistant_delete_actor(self):
+        res = self.delete_item('/actors/1', self.ca_headers)
         self.assertEqual(res.status_code, 401)
 
 
