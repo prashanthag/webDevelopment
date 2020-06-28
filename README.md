@@ -1,8 +1,9 @@
-This is the public repository for Udacity's Full-Stack Nanodegree program.
-#### Project directory path for capstone project
-navigate to project directory to run the project
+
+#### Project directory :
+Navigate to project directory to run capstone project and follow README.md 
  ```bash
  cd projects/capstone/heroku_sample/starter
-```
- github url:
- https://github.com/prashanthag/webDevelopment/tree/master/projects/capstone/heroku_sample/starter
+``` 
+### Heroku
+project running in following url
+  - https://intense-earth-93621.herokuapp.com/
