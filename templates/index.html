@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8">
+<title>Solution for Long Dropdowns</title>
+<link rel="stylesheet" href="/static/css/style.css" type="text/css" media="screen, projection" />
+<script type="f5c1d332e13a81d4067c9553-text/javascript" src='//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js?ver=3.5.1'></script>
+<script type="f5c1d332e13a81d4067c9553-text/javascript" language="javascript" src="/static/js/jquery.dropdown.js"></script>
+</head>
+<body>
+<div id="demo-top-bar">
+<div id="demo-bar-inside">
+<h2 id="demo-bar-badge">
+<a href="/">CSS-Tricks Example</a>
+</h2>
+<div id="demo-bar-buttons">
+</div>
+</div>
+</div>
+<div id="page-wrap">
+<h1>Long Dropdowns</h1>
+<p>If your dropdowns are this long, you might wanna take a re-look at your navigational strategy. But, if it makes sense, a
+technique like this may be beneficial.</p>
+<p>PROBLEM: Dropdown menu goes down below the fold when opened, making lower items inaccesible.</p>
+<p>SOLUTION? Make menu scroll up and down as you mouse through it.</p>
+<ul class="dropdown">
+<li><a href="#">Really Tall Menu</a>
+<ul class="sub_menu">
+<li><a href="#">Artificial Turf</a></li>
+<li><a href="#">Benches &amp; Bleachers</a></li>
+<li><a href="#">Communication Devices</a></li>
+<li><a href="#">Dugouts</a></li>
+<li><a href="#">Fencing &amp; Windscreen</a></li>
+<li><a href="#">Floor Protectors</a></li>
+<li><a href="#">Foul Poles</a></li>
+<li><a href="#">Netting</a></li>
+<li><a href="#">Outdoor Furniture &amp; Storage</a></li>
+<li><a href="#">Outdoor Signs</a></li>
+<li><a href="#">Padding</a></li>
+<li><a href="#">Scoreboards</a></li>
+<li><a href="#">Shade Structures</a></li>
+<li><a href="#">Artificial Turf</a></li>
+<li><a href="#">Benches &amp; Bleachers</a></li>
+<li><a href="#">Communication Devices</a></li>
+<li><a href="#">Dugouts</a></li>
+<li><a href="#">Fencing &amp; Windscreen</a></li>
+<li><a href="#">Floor Protectors</a></li>
+<li><a href="#">Foul Poles</a></li>
+<li><a href="#">Netting</a></li>
+<li><a href="#">Outdoor Furniture &amp; Storage</a></li>
+<li><a href="#">Outdoor Signs</a></li>
+<li><a href="#">Padding</a></li>
+<li><a href="#">Scoreboards</a></li>
+<li><a href="#">Shade Structures</a></li>
+<li><a href="#">Artificial Turf</a></li>
+<li><a href="#">Benches &amp; Bleachers</a></li>
+<li><a href="#">Communication Devices</a></li>
+<li><a href="#">Dugouts</a></li>
+<li><a href="#">Fencing &amp; Windscreen</a></li>
+<li><a href="#">Floor Protectors</a></li>
+<li><a href="#">Foul Poles</a></li>
+<li><a href="#">Netting</a></li>
+<li><a href="#">Outdoor Furniture &amp; Storage</a></li>
+<li><a href="#">Outdoor Signs</a></li>
+<li><a href="#">Padding</a></li>
+<li><a href="#">Scoreboards</a></li>
+<li><a href="#">Shade Structures</a></li>
+</ul>
+</li>
+<li><a href="#">Kinda Tall Menu</a>
+<ul class="sub_menu">
+<li><a href="#">Artificial Turf</a></li>
+<li><a href="#">Benches &amp; Bleachers</a></li>
+<li><a href="#">Communication Devices</a></li>
+<li><a href="#">Dugouts</a></li>
+<li><a href="#">Fencing &amp; Windscreen</a></li>
+<li><a href="#">Floor Protectors</a></li>
+<li><a href="#">Foul Poles</a></li>
+<li><a href="#">Netting</a></li>
+<li><a href="#">Outdoor Furniture &amp; Storage</a></li>
+<li><a href="#">Outdoor Signs</a></li>
+<li><a href="#">Padding</a></li>
+<li><a href="#">Scoreboards</a></li>
+</ul>
+</li>
+<li><a href="#">Average Menu</a>
+<ul class="sub_menu">
+<li><a href="#">Artificial Turf</a></li>
+<li><a href="#">Benches &amp; Bleachers</a></li>
+<li><a href="#">Communication Devices</a></li>
+<li><a href="#">Dugouts</a></li>
+<li><a href="#">Fencing &amp; Windscreen</a></li>
+<li><a href="#">Fencing &amp; Windscreen</a></li>
+</ul>
+</li>
+<li><a href="#">No Menu</a>
+<ul class="sub_menu">
+<select name="" id="cars">
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="mercedes">Mercedes</option>
+  <option value="audi">Audi</option>
+</select>
+</ul>
+</li>
+</ul>
+</div>
+<style type="text/css" style="display: none !important;">
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	body {
+		overflow-x: hidden;
+	}
+	#demo-top-bar {
+		text-align: left;
+		background: #222;
+		position: relative;
+		zoom: 1;
+		width: 100% !important;
+		z-index: 6000;
+		padding: 20px 0 20px;
+	}
+	#demo-bar-inside {
+		width: 960px;
+		margin: 0 auto;
+		position: relative;
+		overflow: hidden;
+	}
+	#demo-bar-buttons {
+		padding-top: 10px;
+		float: right;
+	}
+	#demo-bar-buttons a {
+		font-size: 12px;
+		margin-left: 20px;
+		color: white;
+		margin: 2px 0;
+		text-decoration: none;
+		font: 14px "Lucida Grande", Sans-Serif !important;
+	}
+	#demo-bar-buttons a:hover,
+	#demo-bar-buttons a:focus {
+		text-decoration: underline;
+	}
+	#demo-bar-badge {
+		display: inline-block;
+		width: 302px;
+		padding: 0 !important;
+		margin: 0 !important;
+		background-color: transparent !important;
+	}
+	#demo-bar-badge a {
+		display: block;
+		width: 100%;
+		height: 38px;
+		border-radius: 0;
+		bottom: auto;
+		margin: 0;
+		background: url(/static/images/examples-logo.png) no-repeat;
+		background-size: 100%;
+		overflow: hidden;
+		text-indent: -9999px;
+	}
+	#demo-bar-badge:before, #demo-bar-badge:after {
+		display: none !important;
+	}
+  .sub-menu{
+    touch-action:auto
+  }
+</style>
+<script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="f5c1d332e13a81d4067c9553-|49" defer=""></script></body>
+</html>
+
