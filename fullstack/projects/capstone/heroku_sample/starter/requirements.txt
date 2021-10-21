@@ -2,7 +2,7 @@ alembic==1.4.2
 arrow==0.15.6
 astroid==2.4.2
 autopep8==1.5.3
-Babel==2.8.0
+Babel==2.9.1
 click==7.1.2
 dateparser==0.7.6
 ecdsa==0.15
